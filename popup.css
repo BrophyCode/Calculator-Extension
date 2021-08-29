@@ -13,3 +13,8 @@ button {
 button:hover {
     box-shadow: -1px 1px 0 black;
 }
+#graph {
+    width: 200px;
+    height: 200px;
+    margin: 0px;
+}
