@@ -48,12 +48,38 @@ function evaluate() {
 
 
 // Graphing a 2d equation
+let xrange = [];
+for(let i=0; i<10; i+=0.5){
+    xrange.push(i);
+}
+let yrange = [];
+for(let i=0; i<10; i+=0.5){
+    yrange.push(math.sin(i));
+}
 
-graph = document.getElementById("graph");
+let equation = document.getElementById("equationInput");
+equation.addEventListener("input", parseEq);
+let node;
+let expr;
+
+
+function parseEq(e){
+    try {
+        node = math.parse(e.target.value);
+        expr = node.compile();
+        ans = expr.evaluate({x:math.pi});
+        console.log(ans);
+        //console.log(node.toString());
+    } catch {
+        console.log("Doesn't Work")
+    }
+}
+
+let graph = document.getElementById("graph");
 
 Plotly.newPlot(graph, [ {
-    x:[1,2,3,4,5],
-    y:[1,4,9,16,25],
+    x: xrange,
+    y: yrange,
     mode: "lines" } ],
     {margin: {
         l: 20,
