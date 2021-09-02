@@ -9,41 +9,15 @@
         <div id="graph"></div>
         <div id="graphInputs">
             <p>
-                <label for="equation">y = <input type="text" name="equation" id="equationInput" value="x"></label>
+                <label for="equation">y = <input type="text" name="equation" id="equationInput" value="sin(x)"></label>
             </p>
             <p>
-                <label for="minBound">x min: <input type="number" name="minBound" id="minBound" class="bound" value=-10></label>
-                <label for="maxBound">x max: <input type="number" name="maxBound" id="maxBound" class="bound" value=10></label>
-                <label for="resolution">Resolution: <input type="number" name="resolution" id="resolution" class="bound" value=0.1 min="0"></label>
+                <label for="minBound">x min: <input type="number" name="minBound" id="minBound" class="bound"></label>
+                <label for="maxBound">x max: <input type="number" name="maxBound" id="maxBound" class="bound"></label><br>
+                <label for="step">Step: <input type="number" name="step" id="step" class="bound" min="0" step="0.01"></label>
             </p>
-        </div> 
-        <p id="currentEq"></p>
-        <div id="keypad">
-            <div>
-                <button id="b1">1</button>
-                <button id="b2">2</button>
-                <button id="b3">3</button>
-                <button id="b+">+</button>
-            </div>
-            <div>
-                <button id="b4">4</button>
-                <button id="b5">5</button>
-                <button id="b6">6</button>
-                <button id="b-">-</button>
-            </div>
-            <div>
-                <button id="b7">7</button>
-                <button id="b8">8</button>
-                <button id="b9">9</button>
-                <button id="b/">/</button>
-            </div>
-            <div>
-                <button id="b.">.</button>
-                <button id="b0">0</button>
-                <button id="benter">Enter</button>
-                <button id="bx">x</button>
-            </div>
         </div>
+
         <script src="popup.js"></script>
     </body>
 </html>

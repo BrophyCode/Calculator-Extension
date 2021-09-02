@@ -1,2 +1,4 @@
 # Calculator-Extension
-A calculator as chrome extension
+A 2d graphing calculator as chrome extension
+
+https://github.com/clauer23/Calculator-Extension.git

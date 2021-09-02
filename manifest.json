@@ -1,9 +1,14 @@
 {
     "manifest_version":3,
     "name": "Calculator Extension",
-    "version": "1",
+    "version": "0.1",
     "description": "Graphing calculator in Chrome Browser",
     "action": {
         "default_popup": "popup.html"
-    }
+    },
+    "background":{
+        "service-worker": "background.js"
+    },
+    "options_page": "options.html",
+    "permissions": ["storage"]
 }
