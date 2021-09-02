@@ -11,7 +11,7 @@ for (let i=0; i<10; i++) {
     numButtons[i].addEventListener("click", function(){numSelect(i)});
 }
 
-let bdot = document.getElementById("b.").addEventListener("click", function(){ numSelect("0.0") });
+let bdot = document.getElementById("b.").addEventListener("click", function(){ numSelect(".") });
 let bplus = document.getElementById("b+").addEventListener("click", function(){ operSelect(" + ") });
 let bminus = document.getElementById("b-").addEventListener("click", function(){ operSelect(" - ") });
 let bdiv = document.getElementById("b/").addEventListener("click", function(){ operSelect(" / ") });
@@ -45,47 +45,80 @@ function evaluate() {
     currentEq.textContent = nums[0];
     operator = null;
 }
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Graphing a 2d equation
-let xrange = [];
-for(let i=0; i<10; i+=0.5){
-    xrange.push(i);
-}
-let yrange = [];
-for(let i=0; i<10; i+=0.5){
-    yrange.push(math.sin(i));
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-let equation = document.getElementById("equationInput");
-equation.addEventListener("input", parseEq);
-let node;
-let expr;
-
-
-function parseEq(e){
-    try {
-        node = math.parse(e.target.value);
-        expr = node.compile();
-        ans = expr.evaluate({x:math.pi});
-        console.log(ans);
-        //console.log(node.toString());
-    } catch {
-        console.log("Doesn't Work")
-    }
-}
-
+// Creates an array of numbers that will be used as the x domain
+let xrange = []; 
+// Creates an array of numbers that will be used as the y domain. Same as x by default
+let yrange = xrange; 
+// Sets the location for the graph as the div with id="graph"
 let graph = document.getElementById("graph");
-
+// Creates the graph
 Plotly.newPlot(graph, [ {
     x: xrange,
     y: yrange,
     mode: "lines" } ],
     {margin: {
         l: 20,
-        r: 0,
+        r: 5,
         b: 20,
         t: 20,
         pad: 0},
     },
+);
+
+
+// Grabs the input for the equation from the "equationInput" text input
+// Whenever a character is added to the input, it updates the graph
+let equation = document.getElementById("equationInput");
+let resolution = document.getElementById("resolution");
+let minBound = document.getElementById("minBound");
+let maxBound = document.getElementById("maxBound");
+equation.addEventListener("input", updateEq);
+resolution.addEventListener("input", updateBounds);
+minBound.addEventListener("input", updateBounds);
+maxBound.addEventListener("input", updateBounds);
+
+function updateEq(e) {
+    try {
+        let node = math.parse(equation.value);
+        let expr = node.compile();
+        
+        yrange = xrange.map(setY);
+        function setY(value, index, array){
+            return expr.evaluate({x:value, e:math.e, pi:math.pi});
+        }
+        updateGraph();
+    } catch {
+        console.log("Not a valid Equation");
+    }
+}
+function updateBounds(e){
+    xrange = [];
+    interval = [parseInt(minBound.value), parseInt(maxBound.value), parseFloat(resolution.value)];
+    for(let i=interval[0]; i<interval[1]; i+=interval[2]) {
+        xrange.push(i);
+    }
+    console.log(xrange);
+    updateEq(equation);
+}
+
+// The Graph function takes the text input element as an argument
+function updateGraph(){
+    Plotly.react(graph, [ {
+        x: xrange,
+        y: yrange,
+        mode: "lines" } ],
+        {margin: {
+            l: 20,
+            r: 0,
+            b: 20,
+            t: 20,
+            pad: 0},
+        }
     );
+}
+
+updateBounds();

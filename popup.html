@@ -7,7 +7,16 @@
     </head>
     <body>
         <div id="graph"></div>
-        <p>y=</p><input type="text" name="equation" id="equationInput">
+        <div id="graphInputs">
+            <p>
+                <label for="equation">y = <input type="text" name="equation" id="equationInput" value="x"></label>
+            </p>
+            <p>
+                <label for="minBound">x min: <input type="number" name="minBound" id="minBound" class="bound" value=-10></label>
+                <label for="maxBound">x max: <input type="number" name="maxBound" id="maxBound" class="bound" value=10></label>
+                <label for="resolution">Resolution: <input type="number" name="resolution" id="resolution" class="bound" value=0.1 min="0"></label>
+            </p>
+        </div> 
         <p id="currentEq"></p>
         <div id="keypad">
             <div>
