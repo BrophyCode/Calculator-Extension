@@ -2,7 +2,7 @@
 // Creates an array of numbers that will be used as the x domain
 let xrange = []; 
 // Creates an array of numbers that will be used as the y domain. Same as x by default
-let yrange = xrange; 
+let yrange = xrange;
 // Sets the location for the graph as the div with id="graph"
 let graph = document.getElementById("graph");
 // Creates the graph
@@ -27,7 +27,8 @@ let step = document.getElementById("step");
 let minBound = document.getElementById("minBound");
 let maxBound = document.getElementById("maxBound");
 
-//DONT FUCKING TOUCH THIS FOR GODS SAKE NANFJK>HN>LHFAKLFHA}P
+// Waits for the stored settings to be fetched
+// DONT CHANGE THIS
 async function getLocalStorageValue(){
     return new Promise((resolve, reject) => {
         try {

@@ -6,12 +6,22 @@
 button {
     display: inline-block;
     border: none;
-    width: 40px;
     height: 20px;
-    margin: 3px;
+    margin-top: 3px;
+    background-color: beige;
 }
 button:hover {
-    box-shadow: -1px 1px 0 black;
+    box-shadow: -1px 1px 3px black;
+}
+#addEq {
+    width: 100%;
+}
+input{
+    border: none;
+    background-color: beige;
+}
+input:hover {
+    box-shadow: -1px 1px 3px black;
 }
 #graph {
     width: 200px;
