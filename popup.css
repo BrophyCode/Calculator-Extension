@@ -1,27 +1,26 @@
-#keypad {
-    width: 200px;
-    height: 105px;
-    margin: 5px;
+body{
+    background-color: #9AFEFF;
 }
 button {
     display: inline-block;
     border: none;
     height: 20px;
     margin-top: 3px;
-    background-color: beige;
+    background-color: #00FFFF;
+    width: 100%;
 }
 button:hover {
-    box-shadow: -1px 1px 3px black;
-}
-#addEq {
-    width: 100%;
+    box-shadow: -1px 1px 3px teal;
 }
 input{
     border: none;
-    background-color: beige;
+    background-color: #00FFFF;
+}
+input[type="number"]{
+    width: 40px;
 }
 input:hover {
-    box-shadow: -1px 1px 3px black;
+    box-shadow: -1px 1px 3px teal;
 }
 #graph {
     width: 200px;
@@ -30,4 +29,7 @@ input:hover {
 }
 .bound {
     width: 40px;
+}
+#graphInputs{
+    line-height: 200%;
 }
