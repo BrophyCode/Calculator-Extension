@@ -1,48 +1,54 @@
 class Domain {
-    getRange(){
-        this.range = [];
-        for(let i=this.min; i<this.max; i+=this.step) {
-            this.range.push(i);
-        }
-    }
     constructor(variable, min, max, step){
         this.variable = variable;
         this.min = parseInt(min);
         this.max = parseInt(max);
         this.step = step;
-        this.range = this.getRange();
-
-        this.minInput = document.createElement("input");
-        this.minInput.setAttribute("type", "number");
-        this.minInput.addEventListener("input", this.updateBounds);
-        this.minInput.value = this.min;
-
-        this.maxInput = document.createElement("input");
-        this.maxInput.setAttribute("type", "number");
-        this.maxInput.addEventListener("input", this.updateBounds);
-        this.maxInput.value = this.max;
-
-        this.stepInput = document.createElement("input");
-        this.stepInput.setAttribute("type", "number");
-        this.stepInput.setAttribute("step", 0.01);
-        this.stepInput.setAttribute("min", 0)
-        this.stepInput.addEventListener("input", this.updateBounds);
-        this.stepInput.value = this.step;
+        
+        this.boundUpdateBounds = this.updateBounds.bind(this);
     }
     render() {
         let divEl = document.createElement("p"); 
 
-        divEl.append(this.variable + ": ", this.minInput, " < " + this.variable + " < ", this.maxInput, document.createElement('br'), "Step: ", this.stepInput);
-        console.log(this.minInput);
+
+        let minInput = document.createElement("input");
+        minInput.setAttribute("type", "number");
+        minInput.addEventListener("input", this.updateBounds);
+        minInput.value = this.min;
+
+        let maxInput = document.createElement("input");
+        maxInput.setAttribute("type", "number");
+        maxInput.addEventListener("input", this.updateBounds);
+        maxInput.value = this.max;
+
+        let stepInput = document.createElement("input");
+        stepInput.setAttribute("type", "number");
+        stepInput.setAttribute("step", 0.01);
+        stepInput.setAttribute("min", 0)
+        stepInput.addEventListener("input", this.updateBounds);
+        stepInput.value = this.step;
+
+        divEl.append(this.variable + ": ", minInput, " < " + this.variable + " < ", maxInput, document.createElement('br'), "Step: ", stepInput);
+
+        minInput.setAttribute("id", "minInput");
+        maxInput.setAttribute("id", "maxInput");
+        stepInput.setAttribute("id", "stepInput");
 
         document.getElementById("graphInputs").appendChild(divEl);
     }
-    updateBounds(){
-        console.log(this.minInput);
-        this.min = parseInt(this.minInput.value);
-        this.max = parseInt(this.maxInput.value);
-        this.step = parseInt(this.stepInput.value);
-        this.getRange();
+    get range(){
+        this.domainRange = [];
+        console.log(this.min, this.max, this.step);
+        for(let i = this.min; i < this.max; i += this.step) {
+            this.domainRange.push(i);
+        }
+        return this.domainRange;
+    }
+    updateBounds(event){
+        this.min = parseInt(document.getElementById("minInput").value);
+        this.max = parseInt(document.getElementById("maxInput").value);
+        this.step = parseInt(document.getElementById("stepInput").value);
+        console.log(this.range);
     }
 }
 
@@ -58,6 +64,10 @@ class Equation {
         let eqInput = document.createElement("input");
         eqInput.setAttribute("type", "text");
         eqInput.value = equation;
+
+        divEl.append(this.variable + " ", eqInput);
+
+
     }
 }
 
