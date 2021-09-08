@@ -3,29 +3,26 @@ class Domain {
         this.variable = variable;
         this.min = parseInt(min);
         this.max = parseInt(max);
-        this.step = step;
-        
-        this.boundUpdateBounds = this.updateBounds.bind(this);
+        this.step = parseFloat(step);
     }
     render() {
         let divEl = document.createElement("p"); 
 
-
         let minInput = document.createElement("input");
         minInput.setAttribute("type", "number");
-        minInput.addEventListener("input", this.updateBounds);
+        minInput.addEventListener("input", this.updateBounds.bind(this));
         minInput.value = this.min;
 
         let maxInput = document.createElement("input");
         maxInput.setAttribute("type", "number");
-        maxInput.addEventListener("input", this.updateBounds);
+        maxInput.addEventListener("input", this.updateBounds.bind(this));
         maxInput.value = this.max;
 
         let stepInput = document.createElement("input");
         stepInput.setAttribute("type", "number");
         stepInput.setAttribute("step", 0.01);
-        stepInput.setAttribute("min", 0)
-        stepInput.addEventListener("input", this.updateBounds);
+        stepInput.setAttribute("min", 0);
+        stepInput.addEventListener("input", this.updateBounds.bind(this));
         stepInput.value = this.step;
 
         divEl.append(this.variable + ": ", minInput, " < " + this.variable + " < ", maxInput, document.createElement('br'), "Step: ", stepInput);
@@ -37,18 +34,16 @@ class Domain {
         document.getElementById("graphInputs").appendChild(divEl);
     }
     get range(){
-        this.domainRange = [];
-        console.log(this.min, this.max, this.step);
+        let range = [];
         for(let i = this.min; i < this.max; i += this.step) {
-            this.domainRange.push(i);
+            range.push(i);
         }
-        return this.domainRange;
+        return range;
     }
     updateBounds(event){
         this.min = parseInt(document.getElementById("minInput").value);
         this.max = parseInt(document.getElementById("maxInput").value);
-        this.step = parseInt(document.getElementById("stepInput").value);
-        console.log(this.range);
+        this.step = parseFloat(document.getElementById("stepInput").value);
     }
 }
 
@@ -103,6 +98,7 @@ syncResult.then(result => {
 let insertEq = document.getElementById("insertEq");
 insertEq.addEventListener("click", function() {
     yranges.push(new Equation('Y', "X", xrange));
+    console.log(xrange.range);
     console.log(yranges[0].variable);
 });
 
