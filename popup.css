@@ -1,35 +1,29 @@
-body{
-    background-color: #c9f7f8;
-}
 button {
     display: inline-block;
     border: none;
     height: 20px;
     margin-top: 3px;
-    background-color: #00FFFF;
     width: 100%;
 }
 button:hover {
-    box-shadow: -1px 1px 3px teal;
+    box-shadow: -1px 1px 3px black;
 }
 input{
     border: none;
-    background-color: #00FFFF;
 }
 input[type="number"]{
     width: 40px;
 }
 input:hover {
-    box-shadow: -1px 1px 3px teal;
+    box-shadow: -1px 1px 3px black;
 }
 #graph {
-    width: 200px;
+    width: 300px;
     height: 200px;
     margin: 0px;
+    resize:both;
+    overflow:auto;
 }
 .bound {
     width: 40px;
-}
-#graphInputs{
-    line-height: 200%;
 }
